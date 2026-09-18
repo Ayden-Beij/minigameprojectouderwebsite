@@ -2,44 +2,277 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>2FA Mini Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2FA Security</title>
 
     <style>
-        body {
-            font-family: Arial;
-            background-color: #1e1e1e;
-            color: white;
-            text-align: center;
-            padding-top: 80px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        .box {
-            background-color: #2c2c2c;
-            width: 350px;
-            margin: auto;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #272938;
+            color: white;
+        }
+
+        /* NAVIGATIE */
+
+        nav {
+            width: 100%;
+            height: 70px;
+            background-color: #1f2030;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #3a3b4d;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c63ff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #6c63ff;
+        }
+
+        /* HERO */
+
+        .hero {
+            width: 86%;
+            max-width: 1300px;
+            margin: 70px auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-text {
+            max-width: 650px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #6c63ff;
+        }
+
+        .hero p {
+            font-size: 19px;
+            line-height: 1.7;
+            color: #c5c5ce;
+        }
+
+        .hero-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 25px;
+            background-color: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background-color: #8078ff;
+            transform: translateY(-2px);
+        }
+
+        .security-icon {
+            width: 280px;
+            height: 280px;
+            background-color: #303143;
+            border: 1px solid #46485c;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        /* ALGEMENE SECTIES */
+
+        section {
+            width: 86%;
+            max-width: 1300px;
+            margin: 100px auto;
+        }
+
+        .section-title {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .section-text {
+            color: #bdbdc8;
+            margin-bottom: 35px;
+            font-size: 17px;
+        }
+
+        /* KAARTEN */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background-color: #303143;
+            border: 1px solid #414356;
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 18px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #6c63ff;
+        }
+
+        .card-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            font-size: 21px;
+        }
+
+        .card p {
+            color: #bfc0ca;
+            line-height: 1.6;
+        }
+
+        /* 2FA UITLEG */
+
+        .info-box {
+            background-color: #303143;
+            border: 1px solid #414356;
+            padding: 35px;
+            border-radius: 18px;
+            line-height: 1.7;
+        }
+
+        .info-box strong {
+            color: #8d87ff;
+        }
+
+        .factor-list {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .factor {
+            background-color: #272938;
+            padding: 22px;
+            border-radius: 12px;
+        }
+
+        .factor h3 {
+            margin-bottom: 10px;
+            color: #8d87ff;
+        }
+
+        /* MINIGAME */
+
+        #game {
+            background-color: #303143;
+            border: 1px solid #414356;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .game-box {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .game-box h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .game-box p {
+            color: #bbbcc7;
+            margin-bottom: 20px;
         }
 
         input {
-            padding: 12px;
-            margin: 10px;
-            width: 220px;
-            border-radius: 8px;
-            border: none;
+            width: 100%;
+            padding: 15px;
+            margin: 8px 0;
+            background-color: #272938;
+            color: white;
+            border: 1px solid #484a5e;
+            border-radius: 10px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        input:focus {
+            border-color: #6c63ff;
         }
 
         button {
-            padding: 12px 25px;
-            background-color: #4CAF50;
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            background-color: #6c63ff;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #8078ff;
+        }
+
+        #tweedeStap {
+            margin-top: 25px;
+        }
+
+        #code {
+            font-size: 32px;
+            letter-spacing: 8px;
+            color: #8d87ff;
+            font-weight: bold;
+            margin: 15px;
         }
 
         #resultaat {
@@ -47,47 +280,375 @@
             font-weight: bold;
         }
 
-        #code {
-            font-size: 25px;
-            letter-spacing: 5px;
-            color: #00ff99;
+        /* TIPS */
+
+        .tips {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .tip {
+            background-color: #303143;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #414356;
+        }
+
+        .tip h3 {
+            margin-bottom: 10px;
+        }
+
+        .tip p {
+            color: #bfc0ca;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 100px;
+            padding: 35px;
+            text-align: center;
+            background-color: #1f2030;
+            color: #9293a0;
+        }
+
+        /* MOBIEL */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .security-icon {
+                width: 200px;
+                height: 200px;
+                font-size: 80px;
+            }
+
+            .cards,
+            .factor-list,
+            .tips {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="box">
+    <!-- NAVIGATIE -->
 
-        <h1>🔐 2FA Mini Game</h1>
+    <nav>
+        <div class="logo">
+            <span>🔐</span> 2FA Security
+        </div>
 
-        <p>Stap 1: Voer je wachtwoord in</p>
+        <ul>
+            <li><a href="#wat-is-2fa">Wat is 2FA?</a></li>
+            <li><a href="#methodes">Methodes</a></li>
+            <li><a href="#game">Mini Game</a></li>
+            <li><a href="#tips">Tips</a></li>
+        </ul>
+    </nav>
 
-        <input type="password" id="wachtwoord" placeholder="Wachtwoord">
 
-        <br>
+    <!-- HERO -->
 
-        <button onclick="controleerWachtwoord()">Inloggen</button>
+    <div class="hero">
 
-        <div id="tweedeStap" style="display:none;">
+        <div class="hero-text">
 
-            <p>Stap 2: Voer je 2FA-code in</p>
+            <h1>
+                Bescherm je account met
+                <span>2FA.</span>
+            </h1>
 
-            <p>Jouw tijdelijke code:</p>
+            <p>
+                Tweestapsverificatie zorgt ervoor dat je naast je
+                wachtwoord nog een tweede bewijs nodig hebt om in
+                te loggen.
+            </p>
 
-            <div id="code"></div>
-
-            <input type="text" id="codeInput" placeholder="6 cijfers">
-
-            <br>
-
-            <button onclick="controleerCode()">Controleer code</button>
+            <a href="#game" class="hero-button">
+                Speel de 2FA Mini Game →
+            </a>
 
         </div>
 
-        <p id="resultaat"></p>
+        <div class="security-icon">
+            🔒
+        </div>
 
     </div>
+
+
+    <!-- WAT IS 2FA -->
+
+    <section id="wat-is-2fa">
+
+        <h2 class="section-title">Wat is 2FA?</h2>
+
+        <p class="section-text">
+            2FA staat voor tweestapsverificatie. Je gebruikt twee
+            bewijzen om te laten zien dat jij de eigenaar van een account bent.
+        </p>
+
+        <div class="info-box">
+
+            <p>
+                Zonder 2FA log je alleen in met je wachtwoord.
+                Als iemand je wachtwoord heeft, kan die persoon proberen
+                in te loggen.
+            </p>
+
+            <br>
+
+            <p>
+                Met 2FA voer je eerst je <strong>wachtwoord</strong> in.
+                Daarna moet je nog een <strong>tweede bewijs</strong>
+                geven dat jij het bent.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- METHODES -->
+
+    <section id="methodes">
+
+        <h2 class="section-title">Verschillende 2FA-methodes</h2>
+
+        <p class="section-text">
+            Er zijn verschillende manieren om je identiteit te controleren.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="card-icon">📱</div>
+                <h3>Authenticator-app</h3>
+                <p>
+                    Een app zoals Google Authenticator of Microsoft
+                    Authenticator maakt tijdelijke codes van meestal
+                    6 cijfers.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💬</div>
+                <h3>Sms-code</h3>
+                <p>
+                    Je krijgt na het inloggen een code per sms.
+                    Dit is makkelijk, maar minder veilig dan een
+                    authenticator-app.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔔</div>
+                <h3>Pushmelding</h3>
+                <p>
+                    Je krijgt een melding op je telefoon waarmee
+                    je een inlogpoging kunt goedkeuren of weigeren.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔑</div>
+                <h3>Beveiligingssleutel</h3>
+                <p>
+                    Een fysiek apparaat dat je bijvoorbeeld via USB
+                    of NFC kunt gebruiken.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h3>Passkeys</h3>
+                <p>
+                    Passkeys gebruiken cryptografische sleutels.
+                    Je kunt bijvoorbeeld je vingerafdruk of pincode
+                    gebruiken.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⚠️</div>
+                <h3>Let op phishing</h3>
+                <p>
+                    Geef nooit een 2FA-code aan iemand die erom vraagt
+                    en keur geen onverwachte loginmeldingen goed.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FACTOREN -->
+
+    <section>
+
+        <h2 class="section-title">De twee factoren</h2>
+
+        <p class="section-text">
+            De factoren vallen meestal in drie categorieën.
+        </p>
+
+        <div class="factor-list">
+
+            <div class="factor">
+                <h3>🧠 Iets wat je weet</h3>
+                <p>Wachtwoord of pincode.</p>
+            </div>
+
+            <div class="factor">
+                <h3>📱 Iets wat je hebt</h3>
+                <p>Telefoon, authenticator-app of beveiligingssleutel.</p>
+            </div>
+
+            <div class="factor">
+                <h3>👤 Iets wat je bent</h3>
+                <p>Vingerafdruk of gezichtsherkenning.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MINIGAME -->
+
+    <section id="game">
+
+        <div class="game-box">
+
+            <h2>🔐 2FA Mini Game</h2>
+
+            <p>
+                Probeer veilig in te loggen met twee stappen.
+            </p>
+
+            <p>
+                <strong>Stap 1:</strong> Voer het wachtwoord in.
+            </p>
+
+            <input
+                type="password"
+                id="wachtwoord"
+                placeholder="Wachtwoord"
+            >
+
+            <button onclick="controleerWachtwoord()">
+                Inloggen
+            </button>
+
+
+            <div id="tweedeStap" style="display:none;">
+
+                <p>
+                    <strong>Stap 2:</strong> Voer je 2FA-code in.
+                </p>
+
+                <p>Jouw tijdelijke code:</p>
+
+                <div id="code"></div>
+
+                <input
+                    type="text"
+                    id="codeInput"
+                    placeholder="6 cijfers"
+                    maxlength="6"
+                >
+
+                <button onclick="controleerCode()">
+                    Controleer code
+                </button>
+
+            </div>
+
+            <p id="resultaat"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- TIPS -->
+
+    <section id="tips">
+
+        <h2 class="section-title">Veilig blijven</h2>
+
+        <p class="section-text">
+            Een paar belangrijke tips voor het beveiligen van je accounts.
+        </p>
+
+        <div class="tips">
+
+            <div class="tip">
+                <h3>🔒 Gebruik unieke wachtwoorden</h3>
+                <p>
+                    Gebruik voor ieder belangrijk account een uniek wachtwoord.
+                </p>
+            </div>
+
+            <div class="tip">
+                <h3>📱 Zet 2FA aan</h3>
+                <p>
+                    Gebruik bij voorkeur een authenticator-app,
+                    passkey of beveiligingssleutel.
+                </p>
+            </div>
+
+            <div class="tip">
+                <h3>💾 Bewaar herstelcodes</h3>
+                <p>
+                    Bewaar je herstelcodes op een veilige plek voor
+                    het geval je telefoon kwijt of kapot is.
+                </p>
+            </div>
+
+            <div class="tip">
+                <h3>🚨 Let op onverwachte meldingen</h3>
+                <p>
+                    Keur geen loginmeldingen goed als je zelf niet
+                    probeert in te loggen.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        <p>🔐 2FA Security Mini Game — Gemaakt voor een schoolproject</p>
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
 
     <script>
 
@@ -95,16 +656,18 @@
 
         function controleerWachtwoord() {
 
-            let wachtwoord = document.getElementById("wachtwoord").value;
+            let wachtwoord =
+                document.getElementById("wachtwoord").value;
 
             if (wachtwoord === "1234") {
 
-                document.getElementById("tweedeStap").style.display = "block";
+                document.getElementById("tweedeStap")
+                    .style.display = "block";
 
                 nieuweCode();
 
                 document.getElementById("resultaat").innerHTML =
-                    "✅ Wachtwoord goed! Voer nu de 2FA-code in.";
+                    "✅ Wachtwoord goed! Stap 2 is ontgrendeld.";
 
             } else {
 
@@ -114,14 +677,18 @@
             }
         }
 
+
         function nieuweCode() {
 
-            juisteCode = Math.floor(100000 + Math.random() * 900000);
+            juisteCode =
+                Math.floor(100000 + Math.random() * 900000);
 
-            document.getElementById("code").innerHTML = juisteCode;
+            document.getElementById("code").innerHTML =
+                juisteCode;
 
             setTimeout(nieuweCode, 30000);
         }
+
 
         function controleerCode() {
 
