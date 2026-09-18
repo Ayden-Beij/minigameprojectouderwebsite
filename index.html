@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>2FA Mini Game</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #1e1e1e;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .box {
+            background-color: #2c2c2c;
+            width: 350px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        input {
+            padding: 12px;
+            margin: 10px;
+            width: 220px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #resultaat {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #code {
+            font-size: 25px;
+            letter-spacing: 5px;
+            color: #00ff99;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>🔐 2FA Mini Game</h1>
+
+        <p>Stap 1: Voer je wachtwoord in</p>
+
+        <input type="password" id="wachtwoord" placeholder="Wachtwoord">
+
+        <br>
+
+        <button onclick="controleerWachtwoord()">Inloggen</button>
+
+        <div id="tweedeStap" style="display:none;">
+
+            <p>Stap 2: Voer je 2FA-code in</p>
+
+            <p>Jouw tijdelijke code:</p>
+
+            <div id="code"></div>
+
+            <input type="text" id="codeInput" placeholder="6 cijfers">
+
+            <br>
+
+            <button onclick="controleerCode()">Controleer code</button>
+
+        </div>
+
+        <p id="resultaat"></p>
+
+    </div>
+
+    <script>
+
+        let juisteCode;
+
+        function controleerWachtwoord() {
+
+            let wachtwoord = document.getElementById("wachtwoord").value;
+
+            if (wachtwoord === "1234") {
+
+                document.getElementById("tweedeStap").style.display = "block";
+
+                nieuweCode();
+
+                document.getElementById("resultaat").innerHTML =
+                    "✅ Wachtwoord goed! Voer nu de 2FA-code in.";
+
+            } else {
+
+                document.getElementById("resultaat").innerHTML =
+                    "❌ Verkeerd wachtwoord!";
+
+            }
+        }
+
+        function nieuweCode() {
+
+            juisteCode = Math.floor(100000 + Math.random() * 900000);
+
+            document.getElementById("code").innerHTML = juisteCode;
+
+            setTimeout(nieuweCode, 30000);
+        }
+
+        function controleerCode() {
+
+            let ingevoerdeCode =
+                document.getElementById("codeInput").value;
+
+            if (ingevoerdeCode == juisteCode) {
+
+                document.getElementById("resultaat").innerHTML =
+                    "🎉 Toegang toegestaan! Je hebt de 2FA-minigame gewonnen!";
+
+            } else {
+
+                document.getElementById("resultaat").innerHTML =
+                    "❌ Verkeerde 2FA-code! Probeer opnieuw.";
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
